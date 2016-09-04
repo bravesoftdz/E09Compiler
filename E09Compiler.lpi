@@ -43,7 +43,9 @@
       <Unit1>
         <Filename Value="MainForm.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit1>
       <Unit2>
         <Filename Value="Engine.pas"/>
@@ -67,7 +69,9 @@
       <Unit6>
         <Filename Value="MsgViewer.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmMsgView"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
       </Unit6>
       <Unit7>
         <Filename Value="OptionsForm.pas"/>

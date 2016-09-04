@@ -23,6 +23,9 @@ Smart Tab introduced
 }
 
 type
+
+  { TForm1 }
+
   TForm1 = class(TForm)
     lstCommands: TListBox;
     ToolBar1: TToolBar;

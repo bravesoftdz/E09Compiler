@@ -7,11 +7,6 @@ object frmAbout: TfrmAbout
   ClientHeight = 121
   ClientWidth = 217
   Color = clBtnFace
-  Font.Charset = GREEK_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
-  Font.Style = []
   Position = poScreenCenter
   PixelsPerInch = 96
   object Label1: TLabel

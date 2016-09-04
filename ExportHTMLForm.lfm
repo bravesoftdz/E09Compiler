@@ -5,11 +5,6 @@ object frmExportHTMLWizard: TfrmExportHTMLWizard
   Height = 505
   Caption = 'Βοηθός για την δημιουργία ιστοσελίδας'
   Color = clBtnFace
-  Font.Charset = GREEK_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
-  Font.Style = []
   Position = poScreenCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
