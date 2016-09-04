@@ -1,7 +1,9 @@
 program E09Compiler;
 
+{$MODE Delphi}
+
 uses
-  Forms,
+  Forms, Interfaces,
   MainForm in 'MainForm.pas' {Form1},
   Engine in 'Engine.pas',
   AboutForm in 'AboutForm.pas' {frmAbout},
@@ -12,7 +14,7 @@ uses
   OptionsPageForm in 'OptionsPageForm.pas' {OptionsPage},
   Intf in 'Intf.pas';
 
-{$R *.RES}
+{$R *.res}
 
 begin
   Application.Initialize;

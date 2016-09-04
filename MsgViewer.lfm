@@ -5,7 +5,7 @@ object frmMsgView: TfrmMsgView
   Height = 100
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSizeToolWin
-  Caption = 'Πλαίσιο μηνυμάτων'
+  Caption = 'ΓΓ«Γ΅ΓΓ³Γ©Γ― Γ¬Γ§Γ­ΓµΓ¬ΓΓ΄ΓΉΓ­'
   Color = clBtnFace
   DragKind = dkDock
   Font.Charset = DEFAULT_CHARSET
@@ -13,10 +13,8 @@ object frmMsgView: TfrmMsgView
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   OnHide = FormHide
   PixelsPerInch = 96
-  TextHeight = 13
   object lvMessages: TListView
     Left = 0
     Top = 0

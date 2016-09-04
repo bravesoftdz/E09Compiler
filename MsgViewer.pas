@@ -1,9 +1,11 @@
 unit MsgViewer;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, LCLType, LMessages, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, ExtCtrls, ComCtrls, ImgList;
 
 type
@@ -24,7 +26,7 @@ implementation
 
 uses MainForm;
 
-{$R *.DFM}
+{$R *.lfm}
 
 procedure TfrmMsgView.FormHide(Sender: TObject);
 begin

@@ -3,7 +3,7 @@ object frmAbout: TfrmAbout
   Top = 304
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
-  Caption = 'Πληροφορίες Ανάπτυξης'
+  Caption = 'ΓΓ«Γ§Γ±Γ―Γ¶Γ―Γ±ΓΓ¥Γ² ΓΓ­ΓΓ°Γ΄ΓµΓ®Γ§Γ²'
   ClientHeight = 121
   ClientWidth = 217
   Color = clBtnFace
@@ -12,10 +12,8 @@ object frmAbout: TfrmAbout
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   Position = poScreenCenter
   PixelsPerInch = 96
-  TextHeight = 13
   object Label1: TLabel
     Left = 8
     Top = 8
@@ -28,14 +26,14 @@ object frmAbout: TfrmAbout
     Top = 32
     Width = 111
     Height = 13
-    Caption = 'Έκδοση 1.0.0.4 Debug'
+    Caption = 'ΒΈΓªΓ¤Γ―Γ³Γ§ 1.0.0.4 Debug'
   end
   object Label3: TLabel
     Left = 8
     Top = 56
     Width = 119
     Height = 13
-    Caption = '(C) 2002 Νίκος Γεωργίου'
+    Caption = '(C) 2002 ΓΓΓªΓ―Γ² ΓƒΓ¥ΓΉΓ±Γ£ΓΓ―Γµ'
   end
   object Button1: TButton
     Left = 136

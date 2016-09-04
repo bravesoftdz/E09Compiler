@@ -1,5 +1,7 @@
 unit Engine;
 
+{$MODE Delphi}
+
 interface
 
 uses SysUtils, Classes;

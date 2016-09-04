@@ -1,10 +1,12 @@
 unit ExportHTMLForm;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  OleCtrls, SHDocVw, ExtCtrls, StdCtrls, Buttons, Grids;
+  LCLIntf, LCLType, LMessages, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  {OleCtrls, SHDocVw,} ExtCtrls, StdCtrls, Buttons, Grids;
 
 type
   TfrmExportHTMLWizard = class(TForm)
@@ -42,7 +44,7 @@ var
 
 implementation
 
-{$R *.DFM}
+{$R *.lfm}
 
 procedure TfrmExportHTMLWizard.DoExportHTML(const FileName: string);
 var

@@ -1,5 +1,7 @@
 unit Intf;
 
+{$MODE Delphi}
+
 interface
 
 type

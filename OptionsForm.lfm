@@ -2,7 +2,7 @@ object frmOptions: TfrmOptions
   Left = 198
   Top = 190
   BorderStyle = bsDialog
-  Caption = #197#240#233#235#239#227#221#242
+  Caption = 'ÅðéëïãÝò'
   ClientHeight = 400
   ClientWidth = 704
   Color = clBtnFace
@@ -11,11 +11,9 @@ object frmOptions: TfrmOptions
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   OnHide = FormHide
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
   object btnOk: TBitBtn
     Left = 528
     Top = 368
@@ -29,7 +27,7 @@ object frmOptions: TfrmOptions
     Top = 368
     Width = 81
     Height = 25
-    Caption = #162#234#245#241#239
+    Caption = '¢êõñï'
     TabOrder = 1
     Kind = bkCancel
   end

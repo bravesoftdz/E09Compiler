@@ -1,11 +1,13 @@
 unit MainForm;
 
+{$MODE Delphi}
+
 interface
 
 uses
-	Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+	LCLIntf, LCLType, LMessages, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
 	ToolWin, ComCtrls, StdCtrls, ActnList, ImgList, Menus, Grids, contnrs,
-  ExtCtrls, AppEvnts, Buttons;
+  ExtCtrls, {AppEvnts,} Buttons;
 
 { Revision History
 -=-=-=-=-==-=-=-=-==---=-
@@ -152,7 +154,7 @@ implementation
 uses Engine, AboutForm, ExportHTMLForm, ExtLabelsForm, MsgViewer,
   OptionsForm;
 
-{$R *.DFM}
+{$R *.lfm}
 
 var
 	cmdList: TObjectList;
@@ -263,12 +265,12 @@ end;
 
 procedure ShowError(const msg: string; LineNumber: Integer);
 begin
-	ShowMsg('[Σφάλμα] ' + '(' + IntToStr(LineNumber) + '): ' + msg, 0);
+	ShowMsg('[Γ“Γ¶ΓΓ«Γ¬Γ΅] ' + '(' + IntToStr(LineNumber) + '): ' + msg, 0);
 end;
 
 procedure ShowWarning(const msg: string; LineNumber: Integer);
 begin
-	ShowMsg('[Προειδοποίηση] ' + '(' + IntToStr(LineNumber) + '): ' + msg, 1);
+	ShowMsg('[ΓΓ±Γ―Γ¥Γ©Γ¤Γ―Γ°Γ―ΓΓ§Γ³Γ§] ' + '(' + IntToStr(LineNumber) + '): ' + msg, 1);
 end;
 
 begin
@@ -304,7 +306,7 @@ begin
 				if c.Address then
 					begin
 						if sParam = '' then
-							ShowError('Η εντολή ' + c.Name + ' απαιτεί διεύθυνση για όρισμα', i+1)
+							ShowError('Γ‡ Γ¥Γ­Γ΄Γ―Γ«Γ ' + c.Name + ' Γ΅Γ°Γ΅Γ©Γ΄Γ¥Γ Γ¤Γ©Γ¥Γ½Γ¨ΓµΓ­Γ³Γ§ Γ£Γ©Γ΅ ΓΌΓ±Γ©Γ³Γ¬Γ΅', i+1)
 						else if IsHexNumber(sParam, $FFFF, addrLabel) then
 							begin
 								grid.Cells[1, j] := IntToHex(Lo(addrLabel), 2);
@@ -330,7 +332,7 @@ begin
 					begin
 						sParam := Trim(sParam);
 						if sParam = '' then
-							ShowError('Η εντολή ' + c.Name + ' απαιτεί αριθμό δύο bytes για όρισμα', i+1)
+							ShowError('Γ‡ Γ¥Γ­Γ΄Γ―Γ«Γ ' + c.Name + ' Γ΅Γ°Γ΅Γ©Γ΄Γ¥Γ Γ΅Γ±Γ©Γ¨Γ¬ΓΌ Γ¤Γ½Γ― bytes Γ£Γ©Γ΅ ΓΌΓ±Γ©Γ³Γ¬Γ΅', i+1)
 						else if IsHexNumber(sParam, $FFFF, dblParam) then
 							begin
 								grid.Cells[1, j] := IntToHex(Lo(dblParam), 2);
@@ -339,11 +341,11 @@ begin
 								NextAddr;
 							end
 						else
-              ShowError('Η εντολή ' + c.Name + ' απαιτεί αριθμό δύο bytes για όρισμα', i+1)
+              ShowError('Γ‡ Γ¥Γ­Γ΄Γ―Γ«Γ ' + c.Name + ' Γ΅Γ°Γ΅Γ©Γ΄Γ¥Γ Γ΅Γ±Γ©Γ¨Γ¬ΓΌ Γ¤Γ½Γ― bytes Γ£Γ©Γ΅ ΓΌΓ±Γ©Γ³Γ¬Γ΅', i+1)
 					end;
 			end
 			else
-				ShowError('Άγνωστη εντολή: ' + txtAssembly.Lines[i], i+1);
+				ShowError('ΒΆΓ£Γ­ΓΉΓ³Γ΄Γ§ Γ¥Γ­Γ΄Γ―Γ«Γ: ' + txtAssembly.Lines[i], i+1);
 		end;
 		Inc(i);
 	end;
@@ -365,7 +367,7 @@ begin
 				grid.Objects[1,k] := nil;
 			end
 			else
-				ShowWarning('Η ετικέτα ' + grid.Cells[1, k] + ' δεν έχει οριστεί', 0);
+				ShowWarning('Γ‡ Γ¥Γ΄Γ©ΓªΓΓ΄Γ΅ ' + grid.Cells[1, k] + ' Γ¤Γ¥Γ­ ΓΓ·Γ¥Γ© Γ―Γ±Γ©Γ³Γ΄Γ¥Γ', 0);
 		end;
 
 
@@ -379,11 +381,11 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-	grid.Cells[0, 0] := 'Διεύθυνση';
-	grid.Cells[1, 0] := 'Περιεχόμενο';
-	grid.Cells[2, 0] := 'Ετικέτα';
-	grid.Cells[3, 0] := 'Εντολή';
-	grid.Cells[4, 0] := 'Σχόλια';
+	grid.Cells[0, 0] := 'Γ„Γ©Γ¥Γ½Γ¨ΓµΓ­Γ³Γ§';
+	grid.Cells[1, 0] := 'ΓΓ¥Γ±Γ©Γ¥Γ·ΓΌΓ¬Γ¥Γ­Γ―';
+	grid.Cells[2, 0] := 'Γ…Γ΄Γ©ΓªΓΓ΄Γ΅';
+	grid.Cells[3, 0] := 'Γ…Γ­Γ΄Γ―Γ«Γ';
+	grid.Cells[4, 0] := 'Γ“Γ·ΓΌΓ«Γ©Γ΅';
 	PrepareCommands;
 end;
 
