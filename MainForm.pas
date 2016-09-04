@@ -16,7 +16,7 @@ type
     ToolButton3: TToolButton;
     imgMain: TImageList;
     ActionList1: TActionList;
-    actFileNew: TAction;
+		actFileNew: TAction;
     actFileOpen: TAction;
     actFileSave: TAction;
     MainMenu1: TMainMenu;
@@ -42,15 +42,6 @@ type
     ToolButton10: TToolButton;
     actEditSync: TAction;
     StatusBar1: TStatusBar;
-    panAssembly: TPanel;
-    txtAssembly: TMemo;
-    panAssembly2: TPanel;
-    Label1: TLabel;
-    panBinary: TPanel;
-    grid: TStringGrid;
-    panBinary2: TPanel;
-    Label2: TLabel;
-    Splitter1: TSplitter;
     SaveDialog2: TSaveDialog;
     ApplicationEvents1: TApplicationEvents;
     N9: TMenuItem;
@@ -71,15 +62,23 @@ type
     N13: TMenuItem;
     N14: TMenuItem;
     N15: TMenuItem;
-    N16: TMenuItem;
+		N16: TMenuItem;
     N17: TMenuItem;
-    panMessages: TPanel;
-    Panel1: TPanel;
-    SpeedButton1: TSpeedButton;
-    Bevel1: TBevel;
-    Bevel2: TBevel;
-    lvMessages: TListView;
-    imgMessages: TImageList;
+    N18: TMenuItem;
+    actViewMessages: TAction;
+    N19: TMenuItem;
+    panMain: TPanel;
+    panAssembly: TPanel;
+    txtAssembly: TMemo;
+    panAssembly2: TPanel;
+    Label1: TLabel;
+    Splitter1: TSplitter;
+    panBinary: TPanel;
+    grid: TStringGrid;
+    panBinary2: TPanel;
+    Label2: TLabel;
+    Splitter2: TSplitter;
+    panDock: TPanel;
 		procedure actFileOpenExecute(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure FormDestroy(Sender: TObject);
@@ -88,9 +87,18 @@ type
     procedure actHelpAboutExecute(Sender: TObject);
     procedure actEditSyncExecute(Sender: TObject);
     procedure actFileNewExecute(Sender: TObject);
-    procedure actFileSaveExecute(Sender: TObject);
+		procedure actFileSaveExecute(Sender: TObject);
     procedure ApplicationEvents1Hint(Sender: TObject);
     procedure txtAssemblyChange(Sender: TObject);
+    procedure actViewMessagesExecute(Sender: TObject);
+    procedure actViewMessagesUpdate(Sender: TObject);
+    procedure panDockDockOver(Sender: TObject; Source: TDragDockObject; X,
+      Y: Integer; State: TDragState; var Accept: Boolean);
+    procedure panDockDockDrop(Sender: TObject; Source: TDragDockObject; X,
+      Y: Integer);
+    procedure panDockUnDock(Sender: TObject; Client: TControl;
+      NewTarget: TWinControl; var Allow: Boolean);
+    procedure FormShow(Sender: TObject);
 	private
 		procedure DoOpenFile(const FileName: string);
 		procedure DoExportCSV(const FileName: string);
@@ -98,7 +106,7 @@ type
 		procedure ParseSource;
 		procedure PrepareCommands;
 	public
-		{ Public declarations }
+		procedure MsgViewHide;
 	end;
 
 var
@@ -106,7 +114,7 @@ var
 
 implementation
 
-uses Engine, AboutForm, ExportHTMLForm, ExtLabelsForm;
+uses Engine, AboutForm, ExportHTMLForm, ExtLabelsForm, MsgViewer;
 
 {$R *.DFM}
 
@@ -209,7 +217,7 @@ end;
 
 procedure ShowMsg(const msg: string; Img: Integer);
 begin
-	with lvMessages.Items.Add do begin
+	with frmMsgView.lvMessages.Items.Add do begin
 		Caption := msg;
 		ImageIndex := Img;
 	end;
@@ -226,7 +234,7 @@ begin
 end;
 
 begin
-	lvMessages.Items.Clear;
+	frmMsgView.lvMessages.Items.Clear;
 	grid.RowCount := 2;
 	grid.Rows[1].Clear;
 	i := 0; // assembly line
@@ -447,6 +455,67 @@ end;
 procedure TForm1.txtAssemblyChange(Sender: TObject);
 begin
 	ParseSource;
+end;
+
+procedure TForm1.actViewMessagesExecute(Sender: TObject);
+begin
+	if frmMsgView.Visible then
+		frmMsgView.Hide
+	else begin
+		if not frmMsgView.Floating then begin
+			panDock.Height := frmMsgView.Height;
+			Splitter2.Visible := True;
+		end;
+		frmMsgView.Show;
+	end;
+
+end;
+
+procedure TForm1.actViewMessagesUpdate(Sender: TObject);
+begin
+	(Sender as TAction).Checked := frmMsgView.Visible;
+end;
+
+procedure TForm1.panDockDockOver(Sender: TObject; Source: TDragDockObject;
+	X, Y: Integer; State: TDragState; var Accept: Boolean);
+var
+	ARect: TRect;
+begin
+	Accept := (Source.Control is TfrmMsgView);
+	if Accept then begin
+		ARect := Rect(0, -Source.Control.Height, panDock.Width, 0);
+		MapWindowPoints(panDock.Handle, 0, ARect, 2);
+		Source.DockRect := ARect;
+	end;
+end;
+
+procedure TForm1.panDockDockDrop(Sender: TObject; Source: TDragDockObject;
+	X, Y: Integer);
+begin
+	panDock.Height := Source.DockRect.Bottom - Source.DockRect.Top;
+	Source.Control.Align := alRight;
+	Splitter2.Visible := True;
+	panDock.DockManager.ResetBounds(True);
+end;
+
+procedure TForm1.panDockUnDock(Sender: TObject; Client: TControl;
+	NewTarget: TWinControl; var Allow: Boolean);
+begin
+	Client.Align := alNone;
+	panDock.Height := 0;
+	Splitter2.Visible := False;
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+begin
+	frmMsgView.Show;
+	frmMsgView.ManualDock(panDock, nil, alRight);
+end;
+
+procedure TForm1.MsgViewHide;
+begin
+	panDock.Height := 0;
+	Splitter2.Visible := False;
 end;
 
 end.

@@ -6,7 +6,8 @@ uses
   Engine in 'Engine.pas',
   AboutForm in 'AboutForm.pas' {frmAbout},
   ExtLabelsForm in 'ExtLabelsForm.pas' {frmExtLabels},
-  ExportHTMLForm in 'ExportHTMLForm.pas' {frmExportHTMLWizard};
+  ExportHTMLForm in 'ExportHTMLForm.pas' {frmExportHTMLWizard},
+  MsgViewer in 'MsgViewer.pas' {frmMsgView};
 
 {$R *.RES}
 
@@ -17,5 +18,6 @@ begin
   Application.CreateForm(TfrmAbout, frmAbout);
   Application.CreateForm(TfrmExtLabels, frmExtLabels);
   Application.CreateForm(TfrmExportHTMLWizard, frmExportHTMLWizard);
+  Application.CreateForm(TfrmMsgView, frmMsgView);
   Application.Run;
 end.
