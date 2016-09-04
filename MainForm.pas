@@ -9,6 +9,10 @@ uses
 
 { Revision History
 -=-=-=-=-==-=-=-=-==---=-
+1.0.4
+XHTL fixed
+Refresh goes smoother
+-=-=-=-=-==-=-=-=-==---=-
 1.0.3
 --------
 RRC command supported (RLC was in 07 and 0F)
@@ -214,7 +218,8 @@ begin
 	grid.Cells[0, j] := IntToHex(addr, 4);
 	Inc(addr);
 	Inc(j);
-	grid.RowCount := grid.RowCount + 1;
+  if (j >= grid.RowCount) then
+    grid.RowCount := grid.RowCount + 1;
 	grid.Objects[1, j]:=nil;
 	grid.Rows[j].Clear;
 end;
@@ -268,8 +273,8 @@ end;
 
 begin
 	frmMsgView.lvMessages.Items.Clear;
-	grid.RowCount := 2;
-	grid.Rows[1].Clear;
+	//grid.RowCount := 2;
+	//grid.Rows[1].Clear;
 	i := 0; // assembly line
 	j := 1; // grid row
 	addr := $0800;
@@ -342,6 +347,8 @@ begin
 		end;
 		Inc(i);
 	end;
+
+  grid.RowCount := j + 1;
 
 	(* parse labels *)
 	for k:=1 to grid.RowCount - 1 do

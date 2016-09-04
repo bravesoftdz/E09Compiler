@@ -2,7 +2,7 @@ object frmOptions: TfrmOptions
   Left = 198
   Top = 190
   BorderStyle = bsDialog
-  Caption = 'Επιλογές'
+  Caption = #197#240#233#235#239#227#221#242
   ClientHeight = 400
   ClientWidth = 704
   Color = clBtnFace
@@ -16,36 +16,6 @@ object frmOptions: TfrmOptions
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object GradientShape1: TGradientShape
-    Left = 136
-    Top = 8
-    Width = 561
-    Height = 25
-    FirstColor = clGray
-    LastColor = clSilver
-    GradientType = gtLeftToRight
-    object lblShortDesc: TLabel
-      Left = 8
-      Top = 6
-      Width = 5
-      Height = 13
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Transparent = True
-    end
-    object lblLongDesc: TLabel
-      Left = 549
-      Top = 6
-      Width = 3
-      Height = 13
-      Alignment = taRightJustify
-      Transparent = True
-    end
-  end
   object btnOk: TBitBtn
     Left = 528
     Top = 368
@@ -59,7 +29,7 @@ object frmOptions: TfrmOptions
     Top = 368
     Width = 81
     Height = 25
-    Caption = '’κυρο'
+    Caption = #162#234#245#241#239
     TabOrder = 1
     Kind = bkCancel
   end
@@ -80,6 +50,6 @@ object frmOptions: TfrmOptions
     Width = 561
     Height = 313
     BorderStyle = bsNone
-    TabOrder = 4
+    TabOrder = 3
   end
 end

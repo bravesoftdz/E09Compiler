@@ -4,16 +4,13 @@ interface
 
 uses
 	Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-	ComCtrls, StdCtrls, Buttons, Gradients, OptionsPageForm;
+	ComCtrls, StdCtrls, Buttons, OptionsPageForm;
 
 type
 	TfrmOptions = class(TForm)
 		btnOk: TBitBtn;
 		btnCancel: TBitBtn;
 		tvOptions: TTreeView;
-		GradientShape1: TGradientShape;
-		lblShortDesc: TLabel;
-		lblLongDesc: TLabel;
 		panCon: TScrollBox;
 		procedure FormShow(Sender: TObject);
 		procedure FormHide(Sender: TObject);
@@ -63,8 +60,8 @@ begin
 	curForm := f;
 	if Assigned(curForm) then begin
 		f.Visible := True;
-		lblShortDesc.Caption := f.Caption;
-		lblLongDesc.Caption := f.Hint;
+		//lblShortDesc.Caption := f.Caption;
+		//lblLongDesc.Caption := f.Hint;
 	end;
 end;
 
