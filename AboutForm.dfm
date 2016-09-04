@@ -28,7 +28,7 @@ object frmAbout: TfrmAbout
     Top = 32
     Width = 111
     Height = 13
-    Caption = 'Έκδοση 1.0.0.1 Debug'
+    Caption = 'Έκδοση 1.0.0.3 Debug'
   end
   object Label3: TLabel
     Left = 8

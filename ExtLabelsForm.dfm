@@ -1,8 +1,9 @@
 object frmExtLabels: TfrmExtLabels
   Left = 334
   Top = 357
+  Hint = 'Ετικέτες που δεν δηλώνονται στον κώδικα'
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsDialog
+  BorderStyle = bsNone
   Caption = 'Εξωτερικές Ετικέτες'
   ClientHeight = 194
   ClientWidth = 513
@@ -75,22 +76,5 @@ object frmExtLabels: TfrmExtLabels
       333333377F33333333FF3333C333333330003333733333333777333333333333
       3000333333333333377733333333333333333333333333333333}
     NumGlyphs = 2
-  end
-  object cmdOK: TBitBtn
-    Left = 424
-    Top = 128
-    Width = 81
-    Height = 25
-    TabOrder = 3
-    Kind = bkOK
-  end
-  object cmdCancel: TBitBtn
-    Left = 424
-    Top = 160
-    Width = 81
-    Height = 25
-    Caption = '’κυρο'
-    TabOrder = 4
-    Kind = bkCancel
   end
 end

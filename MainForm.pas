@@ -7,8 +7,16 @@ uses
 	ToolWin, ComCtrls, StdCtrls, ActnList, ImgList, Menus, Grids, contnrs,
   ExtCtrls, AppEvnts, Buttons;
 
+{ Revision History
+-=-=-=-=-==-=-=-=-==---=-
+1.0.3
+--------
+RRC command supported (RLC was in 07 and 0F)
+Smart Tab introduced
+}
+
 type
-  TForm1 = class(TForm)
+	TForm1 = class(TForm)
     lstCommands: TListBox;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
@@ -34,7 +42,7 @@ type
 		SaveDialog1: TSaveDialog;
     N7: TMenuItem;
     N8: TMenuItem;
-    ToolButton6: TToolButton;
+		ToolButton6: TToolButton;
     ToolButton7: TToolButton;
     ToolButton8: TToolButton;
     actHelpAbout: TAction;
@@ -56,7 +64,7 @@ type
     ToolButton12: TToolButton;
     ToolButton13: TToolButton;
     ToolButton14: TToolButton;
-    ToolButton15: TToolButton;
+		ToolButton15: TToolButton;
     ToolButton16: TToolButton;
     ToolButton17: TToolButton;
     N13: TMenuItem;
@@ -69,7 +77,6 @@ type
     N19: TMenuItem;
     panMain: TPanel;
     panAssembly: TPanel;
-    txtAssembly: TMemo;
     panAssembly2: TPanel;
     Label1: TLabel;
     Splitter1: TSplitter;
@@ -79,6 +86,17 @@ type
     Label2: TLabel;
     Splitter2: TSplitter;
     panDock: TPanel;
+		actEditOptions: TAction;
+    N20: TMenuItem;
+    N21: TMenuItem;
+    txtAssembly: TRichEdit;
+    actEditFind: TAction;
+    N22: TMenuItem;
+    N23: TMenuItem;
+    FindDialog1: TFindDialog;
+    ReplaceDialog1: TReplaceDialog;
+    actEditReplace: TAction;
+    N24: TMenuItem;
 		procedure actFileOpenExecute(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
 		procedure FormDestroy(Sender: TObject);
@@ -97,14 +115,27 @@ type
     procedure panDockDockDrop(Sender: TObject; Source: TDragDockObject; X,
       Y: Integer);
     procedure panDockUnDock(Sender: TObject; Client: TControl;
-      NewTarget: TWinControl; var Allow: Boolean);
-    procedure FormShow(Sender: TObject);
+			NewTarget: TWinControl; var Allow: Boolean);
+		procedure FormShow(Sender: TObject);
+		procedure actEditOptionsExecute(Sender: TObject);
+		procedure txtAssemblyKeyUp(Sender: TObject; var Key: Word;
+			Shift: TShiftState);
+    procedure txtAssemblyKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure actEditUndoExecute(Sender: TObject);
+    procedure txtAssemblyMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure actEditFindExecute(Sender: TObject);
+    procedure FindDialog1Find(Sender: TObject);
+    procedure actEditReplaceExecute(Sender: TObject);
+    procedure ReplaceDialog1Replace(Sender: TObject);
 	private
 		procedure DoOpenFile(const FileName: string);
 		procedure DoExportCSV(const FileName: string);
 		procedure DoExportTXT(const FileName: string);
 		procedure ParseSource;
 		procedure PrepareCommands;
+		procedure ShowCaretPos;
 	public
 		procedure MsgViewHide;
 	end;
@@ -114,7 +145,8 @@ var
 
 implementation
 
-uses Engine, AboutForm, ExportHTMLForm, ExtLabelsForm, MsgViewer;
+uses Engine, AboutForm, ExportHTMLForm, ExtLabelsForm, MsgViewer,
+  OptionsForm;
 
 {$R *.DFM}
 
@@ -140,6 +172,7 @@ var
 	nIndex: Integer;
 	sLabel, sParam: string;
 	addrLabel: Integer;
+	dblParam: Integer;
 
 procedure SplitComment(s: string; var sCommand, sComment: string);
 var
@@ -267,9 +300,8 @@ begin
 					begin
 						if sParam = '' then
 							ShowError('Η εντολή ' + c.Name + ' απαιτεί διεύθυνση για όρισμα', i+1)
-						else if IsHexNumber(sParam, 4) then
+						else if IsHexNumber(sParam, $FFFF, addrLabel) then
 							begin
-								addrLabel := StrToInt('$' + sParam);
 								grid.Cells[1, j] := IntToHex(Lo(addrLabel), 2);
 								NextAddr;
 								grid.Cells[1, j] := IntToHex(Hi(addrLabel), 2);
@@ -288,6 +320,21 @@ begin
 					begin
 						grid.Cells[1, j] := sParam;
 						NextAddr;
+					end
+				else if c.Bytes = 3 then (* two bytes of parameters, reverse order *)
+					begin
+						sParam := Trim(sParam);
+						if sParam = '' then
+							ShowError('Η εντολή ' + c.Name + ' απαιτεί αριθμό δύο bytes για όρισμα', i+1)
+						else if IsHexNumber(sParam, $FFFF, dblParam) then
+							begin
+								grid.Cells[1, j] := IntToHex(Lo(dblParam), 2);
+								NextAddr;
+								grid.Cells[1, j] := IntToHex(Hi(dblParam), 2);
+								NextAddr;
+							end
+						else
+              ShowError('Η εντολή ' + c.Name + ' απαιτεί αριθμό δύο bytes για όρισμα', i+1)
 					end;
 			end
 			else
@@ -311,7 +358,7 @@ begin
 				grid.Objects[1,k] := nil;
 			end
 			else
-				ShowWarning('Η ετικέτα ' + grid.Cells[1, k] + ' δεν έχει οριστεί', 0); 
+				ShowWarning('Η ετικέτα ' + grid.Cells[1, k] + ' δεν έχει οριστεί', 0);
 		end;
 
 
@@ -449,7 +496,7 @@ end;
 
 procedure TForm1.ApplicationEvents1Hint(Sender: TObject);
 begin
-	StatusBar1.SimpleText := Application.Hint;
+	StatusBar1.Panels[2].Text := Application.Hint;
 end;
 
 procedure TForm1.txtAssemblyChange(Sender: TObject);
@@ -516,6 +563,112 @@ procedure TForm1.MsgViewHide;
 begin
 	panDock.Height := 0;
 	Splitter2.Visible := False;
+end;
+
+procedure TForm1.actEditOptionsExecute(Sender: TObject);
+begin
+	frmOptions.ShowModal;
+end;
+
+procedure TForm1.txtAssemblyKeyUp(Sender: TObject; var Key: Word;
+	Shift: TShiftState);
+{var
+	s: string;
+	i: Integer;}
+begin
+{	if (Key = 13) and (txtAssembly.CaretPos.Y > 0) then begin
+		s := txtAssembly.Lines[txtAssembly.CaretPos.Y - 1];
+		i := 1;
+		while (i <= Length(s)) and ( (s[i] = ' ') or (s[i] = #9) ) do Inc(i);
+		if i > 1 then begin
+			SetLength(s, i - 1);
+			txtAssembly.Lines[txtAssembly.CaretPos.y] := s + txtAssembly.Lines[txtAssembly.CaretPos.y];
+		end;
+	end;}
+	ShowCaretPos;
+end;
+
+procedure TForm1.ShowCaretPos;
+begin
+	StatusBar1.Panels[0].Text := IntToStr(txtAssembly.CaretPos.Y+1) + ': ' + IntToStr(txtAssembly.CaretPos.X+1);
+end;
+
+procedure TForm1.txtAssemblyKeyDown(Sender: TObject; var Key: Word;
+	Shift: TShiftState);
+begin
+	ShowCaretPos;
+end;
+
+procedure TForm1.actEditUndoExecute(Sender: TObject);
+begin
+	txtAssembly.Undo;
+end;
+
+procedure TForm1.txtAssemblyMouseDown(Sender: TObject;
+	Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+	ShowCaretPos;
+end;
+
+procedure TForm1.actEditFindExecute(Sender: TObject);
+begin
+	FindDialog1.Execute;
+end;
+
+procedure TForm1.FindDialog1Find(Sender: TObject);
+var
+	FoundAt: LongInt;
+	StartPos, ToEnd: Integer;
+begin
+	with txtAssembly do
+  begin
+    { begin the search after the current selection if there is one }
+    { otherwise, begin at the start of the text }
+    if SelLength <> 0 then
+
+      StartPos := SelStart + SelLength
+    else
+
+      StartPos := 0;
+
+    { ToEnd is the length from StartPos to the end of the text in the rich edit control }
+
+    ToEnd := Length(Text) - StartPos;
+
+    FoundAt := FindText(FindDialog1.FindText, StartPos, ToEnd, [stMatchCase]);
+    if FoundAt <> -1 then
+    begin
+      SetFocus;
+      SelStart := FoundAt;
+      SelLength := Length(FindDialog1.FindText);
+    end;
+  end;
+
+end;
+
+procedure TForm1.actEditReplaceExecute(Sender: TObject);
+begin
+	ReplaceDialog1.Execute;
+end;
+
+procedure TForm1.ReplaceDialog1Replace(Sender: TObject);
+var
+  SelPos: Integer;
+begin
+  with TReplaceDialog(Sender) do
+  begin
+  { Perform a global case-sensitive search for FindText in Memo1 }
+    SelPos := Pos(FindText, txtAssembly.Lines.Text);
+    if SelPos > 0 then
+    begin
+			txtAssembly.SelStart := SelPos - 1;
+			txtAssembly.SelLength := Length(FindText);
+			{ Replace selected text with ReplaceText }
+			txtAssembly.SelText := ReplaceText;
+    end
+    else MessageDlg(Concat('Could not find "', FindText, '" in txtAssembly.'), mtError, [mbOk], 0);
+
+	end;
 end;
 
 end.

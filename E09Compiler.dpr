@@ -7,7 +7,10 @@ uses
   AboutForm in 'AboutForm.pas' {frmAbout},
   ExtLabelsForm in 'ExtLabelsForm.pas' {frmExtLabels},
   ExportHTMLForm in 'ExportHTMLForm.pas' {frmExportHTMLWizard},
-  MsgViewer in 'MsgViewer.pas' {frmMsgView};
+  MsgViewer in 'MsgViewer.pas' {frmMsgView},
+  OptionsForm in 'OptionsForm.pas' {frmOptions},
+  OptionsPageForm in 'OptionsPageForm.pas' {OptionsPage},
+  Intf in 'Intf.pas';
 
 {$R *.RES}
 
@@ -16,8 +19,8 @@ begin
   Application.Title := 'E09 Compiler';
   Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TfrmAbout, frmAbout);
-  Application.CreateForm(TfrmExtLabels, frmExtLabels);
   Application.CreateForm(TfrmExportHTMLWizard, frmExportHTMLWizard);
   Application.CreateForm(TfrmMsgView, frmMsgView);
+  Application.CreateForm(TfrmOptions, frmOptions);
   Application.Run;
 end.

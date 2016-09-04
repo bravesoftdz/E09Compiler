@@ -4,26 +4,25 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, Grids;
+	StdCtrls, Buttons, Grids, OptionsPageForm;
 
 type
-  TfrmExtLabels = class(TForm)
+	TfrmExtLabels = class(TOptionsPage)
     grid: TStringGrid;
     cmdAdd: TBitBtn;
     cmdDelete: TBitBtn;
-    cmdOK: TBitBtn;
-    cmdCancel: TBitBtn;
   private
-    { Private declarations }
-  public
-    { Public declarations }
-  end;
+		{ Private declarations }
+	public
+		{ Public declarations }
+	end;
 
 var
-  frmExtLabels: TfrmExtLabels;
+	frmExtLabels: TfrmExtLabels;
 
 implementation
 
 {$R *.DFM}
+
 
 end.

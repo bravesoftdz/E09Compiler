@@ -27,19 +27,24 @@ type
 procedure SplitStringToList(const s: string; list: TStrings);
 function SingleSpaces(const s: string): string;
 procedure SplitList(s: string; var s1, s2: string);
-function IsHexNumber(const s: string; maxDigits: Integer): Boolean;
+function IsHexNumber(const s: string; maxVal: Integer; var num: Integer): Boolean;
 
 implementation
 
-function IsHexNumber(const s: string; maxDigits: Integer): Boolean;
+function IsHexNumber(const s: string; maxVal: Integer; var num: Integer): Boolean;
 var
 	i: Integer;
 begin
-	i := 1;
-
-	while (i <= Length(s)) and ((i <= maxDigits) or (maxDigits = 0)) and (s[i] in ['0'..'9','a'..'f','A'..'F']) do
-		Inc(i);
-  IsHexNumber := (i > Length(s)) or (i > maxDigits);
+	Result := True;
+	try
+		i := StrToInt('$' + s);
+		if i <= maxVal then
+			num := i
+		else
+			Result := False;
+	except
+		Result := False;
+	end;
 end;
 
 procedure SplitList(s: string; var s1, s2: string);
