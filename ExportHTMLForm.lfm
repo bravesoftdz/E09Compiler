@@ -3,7 +3,7 @@ object frmExportHTMLWizard: TfrmExportHTMLWizard
   Top = 242
   Width = 699
   Height = 505
-  Caption = 'Âïçèüò ãéá ôçí äçìéïõñãßá éóôïóåëßäáò'
+  Caption = 'Βοηθός για την δημιουργία ιστοσελίδας'
   Color = clBtnFace
   Font.Charset = GREEK_CHARSET
   Font.Color = clWindowText
@@ -20,21 +20,21 @@ object frmExportHTMLWizard: TfrmExportHTMLWizard
     Top = 8
     Width = 72
     Height = 13
-    Caption = 'ÃñáììáôïóåéñÜ'
+    Caption = 'Γραμματοσειρά'
   end
   object Label2: TLabel
     Left = 8
     Top = 40
     Width = 139
     Height = 13
-    Caption = 'ÐÜ÷ïò ðåñéãñÜììáôïò ðßíáêá'
+    Caption = 'Πάχος περιγράμματος πίνακα'
   end
   object Label3: TLabel
     Left = 248
     Top = 8
     Width = 41
     Height = 13
-    Caption = 'ÌÝãåèïò'
+    Caption = 'Μέγεθος'
   end
   object btnOK: TBitBtn
     Left = 514
@@ -52,7 +52,7 @@ object frmExportHTMLWizard: TfrmExportHTMLWizard
     Width = 81
     Height = 25
     Anchors = [akRight, akBottom]
-    Caption = '¢êõñï'
+    Caption = 'Άκυρο'
     TabOrder = 1
     Kind = bkCancel
   end
@@ -70,7 +70,7 @@ object frmExportHTMLWizard: TfrmExportHTMLWizard
     Top = 8
     Width = 145
     Height = 21
-    Hint = 'Áíôéóôïé÷åß óôï <FONT FACE="ãñáììáôïóåéñÜ">'
+    Hint = 'Αντιστοιχεί στο <FONT FACE="γραμματοσειρά">'
     ItemHeight = 13
     ParentShowHint = False
     ShowHint = True
@@ -83,7 +83,7 @@ object frmExportHTMLWizard: TfrmExportHTMLWizard
     Top = 8
     Width = 49
     Height = 21
-    Hint = 'Áíôéóôïé÷åß óôï <FONT SIZE="ãñáììáôïóåéñÜ">'
+    Hint = 'Αντιστοιχεί στο <FONT SIZE="γραμματοσειρά">'
     ParentShowHint = False
     ShowHint = True
     TabOrder = 4
@@ -95,7 +95,7 @@ object frmExportHTMLWizard: TfrmExportHTMLWizard
     Top = 40
     Width = 41
     Height = 21
-    Hint = 'Áíôéóôïé÷åß óôï <TABLE BORDER="ðÜ÷ïò">'
+    Hint = 'Αντιστοιχεί στο <TABLE BORDER="πάχος">'
     ParentShowHint = False
     ShowHint = True
     TabOrder = 5

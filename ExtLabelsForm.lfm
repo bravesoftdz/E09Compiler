@@ -1,10 +1,10 @@
 object frmExtLabels: TfrmExtLabels
   Left = 334
   Top = 357
-  Hint = 'ÅôéêÝôåò ðïõ äåí äçëþíïíôáé óôïí êþäéêá'
+  Hint = 'Ετικέτες που δεν δηλώνονται στον κώδικα'
   BorderIcons = [biSystemMenu]
   BorderStyle = bsNone
-  Caption = 'ÅîùôåñéêÝò ÅôéêÝôåò'
+  Caption = 'Εξωτερικές Ετικέτες'
   ClientHeight = 194
   ClientWidth = 513
   Color = clBtnFace
@@ -36,7 +36,7 @@ object frmExtLabels: TfrmExtLabels
     Top = 8
     Width = 81
     Height = 25
-    Caption = 'ÐñïóèÞêç'
+    Caption = 'Προσθήκη'
     TabOrder = 1
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
@@ -58,7 +58,7 @@ object frmExtLabels: TfrmExtLabels
     Top = 40
     Width = 81
     Height = 25
-    Caption = 'ÄéáãñáöÞ'
+    Caption = 'Διαγραφή'
     TabOrder = 2
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100

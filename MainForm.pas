@@ -264,12 +264,12 @@ end;
 
 procedure ShowError(const msg: string; LineNumber: Integer);
 begin
-	ShowMsg('[ÓöÜëìá] ' + '(' + IntToStr(LineNumber) + '): ' + msg, 0);
+	ShowMsg('[Σφάλμα] ' + '(' + IntToStr(LineNumber) + '): ' + msg, 0);
 end;
 
 procedure ShowWarning(const msg: string; LineNumber: Integer);
 begin
-	ShowMsg('[Ðñïåéäïðïßçóç] ' + '(' + IntToStr(LineNumber) + '): ' + msg, 1);
+	ShowMsg('[Προειδοποίηση] ' + '(' + IntToStr(LineNumber) + '): ' + msg, 1);
 end;
 
 begin
@@ -305,7 +305,7 @@ begin
 				if c.Address then
 					begin
 						if sParam = '' then
-							ShowError('Ç åíôïëÞ ' + c.Name + ' áðáéôåß äéåýèõíóç ãéá üñéóìá', i+1)
+							ShowError('Η εντολή ' + c.Name + ' απαιτεί διεύθυνση για όρισμα', i+1)
 						else if IsHexNumber(sParam, $FFFF, addrLabel) then
 							begin
 								grid.Cells[1, j] := IntToHex(Lo(addrLabel), 2);
@@ -331,7 +331,7 @@ begin
 					begin
 						sParam := Trim(sParam);
 						if sParam = '' then
-							ShowError('Ç åíôïëÞ ' + c.Name + ' áðáéôåß áñéèìü äýï bytes ãéá üñéóìá', i+1)
+							ShowError('Η εντολή ' + c.Name + ' απαιτεί αριθμό δύο bytes για όρισμα', i+1)
 						else if IsHexNumber(sParam, $FFFF, dblParam) then
 							begin
 								grid.Cells[1, j] := IntToHex(Lo(dblParam), 2);
@@ -340,11 +340,11 @@ begin
 								NextAddr;
 							end
 						else
-              ShowError('Ç åíôïëÞ ' + c.Name + ' áðáéôåß áñéèìü äýï bytes ãéá üñéóìá', i+1)
+              ShowError('Η εντολή ' + c.Name + ' απαιτεί αριθμό δύο bytes για όρισμα', i+1)
 					end;
 			end
 			else
-				ShowError('¢ãíùóôç åíôïëÞ: ' + txtAssembly.Lines[i], i+1);
+				ShowError('Άγνωστη εντολή: ' + txtAssembly.Lines[i], i+1);
 		end;
 		Inc(i);
 	end;
@@ -366,7 +366,7 @@ begin
 				grid.Objects[1,k] := nil;
 			end
 			else
-				ShowWarning('Ç åôéêÝôá ' + grid.Cells[1, k] + ' äåí Ý÷åé ïñéóôåß', 0);
+				ShowWarning('Η ετικέτα ' + grid.Cells[1, k] + ' δεν έχει οριστεί', 0);
 		end;
 
 
@@ -380,11 +380,11 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-	grid.Cells[0, 0] := 'Äéåýèõíóç';
-	grid.Cells[1, 0] := 'Ðåñéå÷üìåíï';
-	grid.Cells[2, 0] := 'ÅôéêÝôá';
-	grid.Cells[3, 0] := 'ÅíôïëÞ';
-	grid.Cells[4, 0] := 'Ó÷üëéá';
+	grid.Cells[0, 0] := 'Διεύθυνση';
+	grid.Cells[1, 0] := 'Περιεχόμενο';
+	grid.Cells[2, 0] := 'Ετικέτα';
+	grid.Cells[3, 0] := 'Εντολή';
+	grid.Cells[4, 0] := 'Σχόλια';
 	PrepareCommands;
 end;
 

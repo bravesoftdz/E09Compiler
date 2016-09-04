@@ -2,7 +2,7 @@ object frmOptions: TfrmOptions
   Left = 198
   Top = 190
   BorderStyle = bsDialog
-  Caption = 'ÅðéëïãÝò'
+  Caption = 'Επιλογές'
   ClientHeight = 400
   ClientWidth = 704
   Color = clBtnFace
@@ -27,7 +27,7 @@ object frmOptions: TfrmOptions
     Top = 368
     Width = 81
     Height = 25
-    Caption = '¢êõñï'
+    Caption = 'Άκυρο'
     TabOrder = 1
     Kind = bkCancel
   end

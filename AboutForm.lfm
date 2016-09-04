@@ -3,7 +3,7 @@ object frmAbout: TfrmAbout
   Top = 304
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
-  Caption = 'Ðëçñïöïñßåò ÁíÜðôõîçò'
+  Caption = 'Πληροφορίες Ανάπτυξης'
   ClientHeight = 121
   ClientWidth = 217
   Color = clBtnFace
@@ -26,14 +26,14 @@ object frmAbout: TfrmAbout
     Top = 32
     Width = 111
     Height = 13
-    Caption = '¸êäïóç 1.0.0.4 Debug'
+    Caption = 'Έκδοση 1.0.0.4 Debug'
   end
   object Label3: TLabel
     Left = 8
     Top = 56
     Width = 119
     Height = 13
-    Caption = '(C) 2002 Íßêïò Ãåùñãßïõ'
+    Caption = '(C) 2002 Νίκος Γεωργίου'
   end
   object Button1: TButton
     Left = 136
