@@ -13,7 +13,6 @@ type
     btnOK: TBitBtn;
 		BitBtn2: TBitBtn;
 		Panel1: TPanel;
-		WebBrowser1: TWebBrowser;
     Label1: TLabel;
     cmbFontFace: TComboBox;
     Label2: TLabel;
@@ -78,7 +77,7 @@ end;
 procedure TfrmExportHTMLWizard.DoExportTemp;
 begin
 	DoExportHtml('C:\E09_preview.html');
-	WebBrowser1.Navigate('C:\E09_preview.html');
+	//WebBrowser1.Navigate('C:\E09_preview.html');
 end;
 
 procedure TfrmExportHTMLWizard.FormDestroy(Sender: TObject);

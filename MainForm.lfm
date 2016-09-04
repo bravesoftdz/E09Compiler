@@ -470,7 +470,7 @@ object Form1: TForm1
           Caption = 'Êþäéêáò óå assembly'
         end
       end
-      object txtAssembly: TRichEdit
+      object txtAssembly: TMemo
         Left = 0
         Top = 18
         Width = 775
@@ -482,7 +482,6 @@ object Form1: TForm1
         Font.Name = 'Courier New'
         Font.Style = []
         ParentFont = False
-        PlainText = True
         ScrollBars = ssBoth
         TabOrder = 1
         WantTabs = True
@@ -1282,10 +1281,6 @@ object Form1: TForm1
       'éìÝíïõ|*.txt'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 472
-  end
-  object ApplicationEvents1: TApplicationEvents
-    OnHint = ApplicationEvents1Hint
-    Left = 632
   end
   object FindDialog1: TFindDialog
     OnFind = FindDialog1Find

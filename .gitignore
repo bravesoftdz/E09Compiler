@@ -70,3 +70,6 @@ __recovery/
 *.log
 *.compiled
 *.lps
+*.ppu
+*.or
+E09Compiler

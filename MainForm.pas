@@ -57,7 +57,6 @@ type
     actEditSync: TAction;
     StatusBar1: TStatusBar;
     SaveDialog2: TSaveDialog;
-    ApplicationEvents1: TApplicationEvents;
     N9: TMenuItem;
     N10: TMenuItem;
     N11: TMenuItem;
@@ -95,7 +94,7 @@ type
 		actEditOptions: TAction;
     N20: TMenuItem;
     N21: TMenuItem;
-    txtAssembly: TRichEdit;
+    txtAssembly: TMemo;
     actEditFind: TAction;
     N22: TMenuItem;
     N23: TMenuItem;
@@ -540,7 +539,7 @@ begin
 	Accept := (Source.Control is TfrmMsgView);
 	if Accept then begin
 		ARect := Rect(0, -Source.Control.Height, panDock.Width, 0);
-		MapWindowPoints(panDock.Handle, 0, ARect, 2);
+		//MapWindowPoints(panDock.Handle, 0, ARect, 2);
 		Source.DockRect := ARect;
 	end;
 end;
@@ -644,7 +643,7 @@ begin
 
     ToEnd := Length(Text) - StartPos;
 
-    FoundAt := FindText(FindDialog1.FindText, StartPos, ToEnd, [stMatchCase]);
+    FoundAt := -1; //FindText(FindDialog1.FindText, StartPos, ToEnd, [stMatchCase]);
     if FoundAt <> -1 then
     begin
       SetFocus;
