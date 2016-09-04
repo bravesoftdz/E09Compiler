@@ -5,15 +5,16 @@ unit OptionsPageForm;
 interface
 
 uses
-	LCLIntf, LCLType, LMessages, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs;
+  LCLIntf, LCLType, LMessages, Messages, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs;
 
 type
-	TOptionsPage = class(TForm)
-	protected
-		function GetLogicalPath: string; virtual;
-	public
-		property LogicalPath: string read GetLogicalPath;
-	end;
+  TOptionsPage = class(TForm)
+  protected
+    function GetLogicalPath: string; virtual;
+  public
+    property LogicalPath: string read GetLogicalPath;
+  end;
 
 implementation
 
@@ -21,7 +22,7 @@ implementation
 
 function TOptionsPage.GetLogicalPath: string;
 begin
-	Result := '';
+  Result := '';
 end;
 
 end.

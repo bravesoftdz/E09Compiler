@@ -5,22 +5,23 @@ unit MsgViewer;
 interface
 
 uses
-  LCLIntf, LCLType, LMessages, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, LCLType, LMessages, Messages, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs,
   Buttons, ExtCtrls, ComCtrls, ImgList;
 
 type
   TfrmMsgView = class(TForm)
     lvMessages: TListView;
     imgMessages: TImageList;
-		procedure FormHide(Sender: TObject);
-	private
-		{ Private declarations }
-	public
-		{ Public declarations }
-	end;
+    procedure FormHide(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
 
 var
-	frmMsgView: TfrmMsgView;
+  frmMsgView: TfrmMsgView;
 
 implementation
 

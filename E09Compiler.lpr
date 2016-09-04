@@ -3,7 +3,8 @@ program E09Compiler;
 {$MODE Delphi}
 
 uses
-  Forms, Interfaces,
+  Forms,
+  Interfaces,
   MainForm in 'MainForm.pas' {Form1},
   Engine in 'Engine.pas',
   AboutForm in 'AboutForm.pas' {frmAbout},
