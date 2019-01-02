@@ -12,6 +12,9 @@ uses
 
 { Revision History
 -=-=-=-=-==-=-=-=-==---=-
+1.0.5
+Enabled High DPI
+-=-=-=-=-==-=-=-=-==---=-
 1.0.4
 XHTL fixed
 Refresh goes smoother
@@ -160,8 +163,8 @@ uses Engine, AboutForm, ExportHTMLForm, ExtLabelsForm, MsgViewer,
 
 var
   cmdList: TObjectList;
-  cmdhash: TStringList;
-  KeyWordsHash: TStringList;
+  cmdHash: TStringList;
+  KeywordsHash: TStringList;
   LabelsHash: TStringList;
   ExtLabelsHash: TStringList;
 
@@ -239,7 +242,7 @@ var
     sParam := '';
     SplitList(s1, s1, s3);
     s3 := s;
-    if KeyWordsHash.Find(s1, nKWIndex) then
+    if KeywordsHash.Find(s1, nKWIndex) then
     begin
       repeat
         if cmdHash.Find(s3, nIndex) then (* MOV A,B *)
@@ -400,22 +403,23 @@ begin
   PrepareCommands;
 end;
 
+function CreateSortedStringList: TStringList;
+begin
+  Result := TStringList.Create;
+  Result.Sorted := True;
+  Result.Duplicates := dupIgnore;
+end;
+
 procedure TForm1.PrepareCommands;
 var
   i: integer;
   c: T8085Command;
 begin
   cmdList := TObjectList.Create;
-  cmdHash := TStringList.Create;
-  KeyWordsHash := TStringList.Create;
-  KeyWordsHash.Sorted := True;
-  KeyWordsHash.Duplicates := dupIgnore;
-  LabelsHash := TStringList.Create;
-  LabelsHash.Sorted := True;
-  LabelsHash.Duplicates := dupIgnore;
-  ExtLabelsHash := TStringList.Create;
-  ExtLabelsHash.Sorted := True;
-  ExtLabelsHash.Duplicates := dupIgnore;
+  cmdHash := CreateSortedStringList;
+  KeywordsHash := CreateSortedStringList;
+  LabelsHash := CreateSortedStringList;
+  ExtLabelsHash := CreateSortedStringList;
   ExtLabelsHash.AddObject('DELB', TObject($0430));
 
   for i := 0 to lstCommands.Items.Count - 1 do
@@ -424,9 +428,9 @@ begin
     cmdList.Add(c);
     cmdHash.AddObject(c.Name, c);
     if Pos(' ', c.Name) = 0 then
-      KeyWordsHash.Add(c.Name)
+      KeywordsHash.Add(c.Name)
     else
-      KeyWordsHash.Add(Copy(c.Name, 1, Pos(' ', c.Name) - 1));
+      KeywordsHash.Add(Copy(c.Name, 1, Pos(' ', c.Name) - 1));
   end;
   cmdHash.Sort;
 
@@ -436,7 +440,7 @@ procedure TForm1.FormDestroy(Sender: TObject);
 begin
   cmdHash.Free;
   cmdList.Free;
-  KeyWordsHash.Free;
+  KeywordsHash.Free;
   LabelsHash.Free;
   ExtLabelsHash.Free;
 end;
